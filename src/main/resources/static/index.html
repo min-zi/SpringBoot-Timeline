@@ -250,15 +250,6 @@
             $(`#${id}-edit`).hide();
         }
 
-        function hideEdits(id) {
-            $(`#${id}-editarea`).hide();
-            $(`#${id}-submit`).hide();
-            $(`#${id}-delete`).hide();
-
-            $(`#${id}-contents`).show();
-            $(`#${id}-edit`).show();
-        }
-
         /*********** JQuery 작동 부분 ***********/
         $(document).ready(function () {
             // HTML 문서를 로드할 때마다 실행함
@@ -365,7 +356,18 @@
             });
         }
 
-
+        // 메모 삭제
+        function deleteOne(id) {
+            // DELETE 방식으로 /api/memos/{id} 에 요청해서 메모를 삭제함
+            $.ajax({
+                type: "DELETE",
+                url: `/api/memos/${id}`,
+                success: function (response) {
+                    alert('삭제되었습니다!');
+                    window.location.reload();
+                }
+            })
+        }
 
     </script>
 </head>
