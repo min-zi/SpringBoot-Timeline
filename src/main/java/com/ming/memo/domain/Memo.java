@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor // 기본생성자를 만들어 줌
+@NoArgsConstructor // 기본생성자를 만들어줌
 @Getter
 @Entity // 테이블과 연계됨을 스프링에게 알려줌
 public class Memo extends Timestamped { // 생성,수정 시간을 자동으로 만들어줌
@@ -25,6 +25,11 @@ public class Memo extends Timestamped { // 생성,수정 시간을 자동으로 
     }
 
     public Memo(MemoRequestDto requestDto) {
+        this.username = requestDto.getUsername();
+        this.contents = requestDto.getContents();
+    }
+
+    public void update(MemoRequestDto requestDto) {
         this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
     }
