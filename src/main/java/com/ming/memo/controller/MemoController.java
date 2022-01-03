@@ -7,6 +7,7 @@ import com.ming.memo.service.MemoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,7 +24,9 @@ public class MemoController {
 
     @GetMapping("/api/memos")
     public List<Memo> read() {
-        return memoRepository.findAllByOrderByModifiedAtDesc();
+        LocalDateTime start = LocalDateTime.now().minusDays(1); // 어제시간
+        LocalDateTime end = LocalDateTime.now(); // 지금시간
+        return memoRepository.findAllByModifiedAtBetweenOrderByModifiedAtDesc(start, end);
     }
 
     @PutMapping("/api/memos/{id}")
